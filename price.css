@@ -1,0 +1,142 @@
+body{
+    font-family: 'PT Sans', sans-serif;
+}
+.pTool-outermost-container{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+.pTool-service-category-container{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+.category-cube-container{
+    width: 100%;
+    display: flex;
+    border: 0.12rem solid lightslategray;
+    box-sizing: border-box;
+}
+.category-cube{
+    height: 4rem;
+    padding: 0.25%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    width: 8%;
+    border: 0.12rem solid lightslategray;
+    margin: 1%;
+    display: flex;
+    flex-direction: column;
+}
+.pTool-selected-cube{
+    border: 0.25rem solid lightslategray;
+    border-radius: 10%;
+}
+.category-cube:hover{
+    cursor: pointer;
+    background-color: #E0E2E8;
+}
+
+.category-cube-text{
+    margin: auto;
+    font-size: 0.5rem;
+    text-align: center;
+}
+.category-cube-icon{
+    font-size: 2rem;
+    margin: auto;
+    margin-top: 1rem;
+    color: #303133
+}
+
+.service-headers-outer-container{
+    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: #DD5962;
+    display: flex;
+}
+
+.service-grid-container{
+    margin-left: 5%;
+    width: 10%;
+}
+.description-grid-container{
+    margin-left: 2%;
+    width: 60%;
+}
+.quantity-grid-container{
+    margin-left: 1%;
+    width: 10%;
+}
+.price-grid-container{
+    margin-left: 1%;
+    width: 10%;
+}
+.service-header{
+    color: white;
+}
+
+.pTool-services-container{
+    display: flex;
+    flex-direction: column;
+}
+.pTool-service-container{
+    display: flex;
+    height: 6rem;
+}
+.pTool-make-bg-light-blue{
+    background-color:  #E0E2E8;
+}
+
+.pTool-service-col{
+    display: flex;
+    flex-direction: column;
+}
+.pTool-service-text{
+    font-size: 0.75rem;
+    margin: 0rem;
+}
+.pTool-service-text-name{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.pTool-quantity-input{
+    height: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    text-align: right;
+}
+.pTool-service-text-large{
+    margin: auto;
+    margin-left: 0;
+    font-size: 2rem;
+}
+
+.pTool-total-inner-container{
+    box-sizing: border-box;
+    height: 5rem;
+    margin-left: auto;
+    width: 20%;
+    border: 0.12rem solid lightslategray;
+    display: flex;
+    flex-direction: column;
+}
+.pTool-totla-col{
+    height: 100%;
+    display: flex;
+}
+.content-centerer{
+    display: flex;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 100%;
+}
+.pTool-total-text{
+    margin: 0;
+    width: 100%;
+}
+.display-none{
+    display: none;
+}
