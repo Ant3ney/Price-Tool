@@ -18,13 +18,13 @@ body{
     box-sizing: border-box;
 }
 .category-cube{
-    height: 4rem;
-    padding: 0.25%;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    width: 8%;
+    height: 3rem;
+    padding: 0.1%;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    width: 6%;
     border: 0.12rem solid lightslategray;
-    margin: 1%;
+    margin: 0.5%;
     display: flex;
     flex-direction: column;
 }
@@ -43,38 +43,43 @@ body{
     text-align: center;
 }
 .category-cube-icon{
-    font-size: 2rem;
+    font-size: 1rem;
     margin: auto;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     color: #303133
 }
 
 .service-headers-outer-container{
     width: 100%;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
     background-color: #DD5962;
     display: flex;
 }
 
 .service-grid-container{
-    margin-left: 5%;
+    margin-left: 3%;
     width: 10%;
 }
 .description-grid-container{
     margin-left: 2%;
-    width: 60%;
+    width: 70%;
 }
 .quantity-grid-container{
     margin-left: 1%;
     width: 10%;
 }
 .price-grid-container{
-    margin-left: 1%;
-    width: 10%;
+    margin-left: 0%; /* 10% */
+    width: 0%; /* 10% */
 }
 .service-header{
+    margin: 0;
     color: white;
+}
+.pTool-service-description-header{
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
 }
 
 .pTool-services-container{
@@ -83,7 +88,6 @@ body{
 }
 .pTool-service-container{
     display: flex;
-    height: 6rem;
 }
 .pTool-make-bg-light-blue{
     background-color:  #E0E2E8;
@@ -103,8 +107,8 @@ body{
 }
 .pTool-quantity-input{
     height: 100%;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
     font-size: 2rem;
     text-align: right;
 }
@@ -112,6 +116,10 @@ body{
     margin: auto;
     margin-left: 0;
     font-size: 2rem;
+}
+
+.pTool-service-text-description{
+    margin-bottom: 0.5rem;
 }
 
 .pTool-total-inner-container{
