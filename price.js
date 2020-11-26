@@ -93,9 +93,9 @@
                 price: 60
             }),
             new Service({
-                name: 'Wall / Ceiling Covering item placeholder 02',
+                name: 'Wall item 02',
                 descriptionHeader: 'Ceiling Repair',
-                description: 'Vestibulum imperdiet consequat hendrerit. Nunc tortor risus, facilisis efficitur elit ut, malesuada lobortis erat. Quisque laoreet interdum elementum. Sed eget sagittis sem.',
+                description: 'Vestibulum imperdiet consequat hendrerit. Nunc tortor risus, facilisis.',
                 quantity: 0,
                 price: 60
             }),
