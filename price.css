@@ -60,7 +60,12 @@ body{
 
 .service-grid-container{
     margin-left: 3%;
-    width: 10%;
+    margin-right: 3%;
+    height: 2rem;
+}
+.service-grid-container-focus{
+    margin-left: 3%;
+    margin-right: 3%;
 }
 .description-grid-container{
     margin-left: 2%;
@@ -89,6 +94,7 @@ body{
 }
 .pTool-service-container{
     display: flex;
+    flex-direction: column;
 }
 .pTool-make-bg-light-blue{
     background-color:  #E0E2E8;
@@ -105,18 +111,35 @@ body{
 .pTool-service-text-name{
     margin-top: auto;
     margin-bottom: auto;
+    font-size: 1rem;
+    text-decoration: underline;
+}
+.pTool-service-text-name-focus{
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 1.75rem;
 }
 .pTool-quantity-input{
     height: 100%;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
+    margin-left: auto;
     font-size: 2rem;
+    width: 10%;
     text-align: right;
 }
 .pTool-service-text-large{
     margin: auto;
     margin-left: 0;
     font-size: 2rem;
+}
+.back-button{
+    background-color: #DD5962;
+    color: white;
+    padding-left: 0.25rem;
+}
+.back-button:hover{
+    cursor: pointer;
 }
 
 .pTool-service-text-description{
@@ -147,7 +170,7 @@ body{
     width: 100%;
 }
 .display-none{
-    display: none;
+    display: none !important;
 }
 
 .custum-svg-icon{
@@ -156,4 +179,11 @@ body{
     max-width: 70%;
     max-height: 50%;
     margin-bottom: 0.12rem;
+}
+.pTool-focous-container{
+    display: flex;
+    flex-direction: column;
+}
+.pTool-Input{
+    height: auto !important;
 }

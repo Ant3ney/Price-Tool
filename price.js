@@ -469,10 +469,12 @@
     //#endregion
     //#region Finding service elements
         var allServiceNames = document.getElementsByClassName('pTool-service-text-name');
-        var allServiceHeaderDescriptions = document.getElementsByClassName('pTool-service-description-header');
-        var allServiceDescriptions = document.getElementsByClassName('pTool-service-text-description');
-        var allServiceQuantities = document.getElementsByClassName('pTool-quantity-input');
-        var allServicePrices = document.getElementsByClassName('pTool-service-price-text');
+
+        var focusServiceName = document.querySelector('.pTool-service-text-name-focus');
+        var serviceHeaderDescription = document.getElementsByClassName('pTool-service-description-header')[0];
+        var serviceDescription = document.getElementsByClassName('pTool-service-text-description')[0];
+        var serviceQuantitie = document.getElementsByClassName('pTool-quantity-input')[0];
+        var servicePrice = document.getElementsByClassName('pTool-service-price-text')[0];
     //#endregion
      var allServiceContainers = document.getElementsByClassName('pTool-service-container');
      var currentCategory;
@@ -517,10 +519,6 @@
             for(var i = 0; i < serviceLength; i++){
                 showService(i);
                 allServiceNames[i].innerText = allServies[i].getName();
-                allServiceHeaderDescriptions[i].innerText = allServies[i].getDescriptionHeader();
-                allServiceDescriptions[i].innerText = allServies[i].getDescription();
-                allServiceQuantities[i].value = allServies[i].getQuantity();
-                allServicePrices[i].innerText = ('$' + allServies[i].getPrice());
             }
         }
         function removeSelectedFromAllCategorys(){
@@ -552,28 +550,7 @@
     var subTotalEle = document.querySelector('.pTool-subTotal-dollars');
     var taxEle = document.querySelector('.pTool-tax-dollars');
     var totalEle = document.querySelector('.pTool-total-dollars');
-    //#region On quantity change listeners
-    for(let i = 0; i < allServiceQuantities.length; i++){
-        let quantityEle = allServiceQuantities[i];
-        quantityEle.addEventListener('change', () => {
-            var serviceIndex = getIndexOfQuantity(quantityEle);
-            updateQuantity(serviceIndex, quantityEle.value);
-            updatePriceContainer();
-        })
-    }
-    //#endregion
     //#region Helper functions
-        function updateQuantity(serviceIndex, amount){
-            currentCategory.getAllServices()[serviceIndex].setQuantity(amount);
-        }
-        function getIndexOfElement(ele){
-            index = Math.floor([...ele.parentElement.childNodes].indexOf(ele) / 2);
-            return index;
-        }
-        function getIndexOfQuantity(ele){
-            var serviceContainerEle = ele.parentElement.parentElement;
-            return getIndexOfElement(serviceContainerEle);
-        }
         function getSubTotalPrice(){
             var subTotal = 0;
             allCategorys.forEach(category => {
@@ -604,9 +581,63 @@
         }   
     //#endregion
 //#endregion
+//#region Service button functionality
+    var focousContainer = document.getElementsByClassName('pTool-focous-container')[0];
+    var allServicesOuterContainer = document.querySelector('.pTool-services-container');
+    var categoryContainer = document.querySelector('.pTool-service-category-container');
+    var backButton = document.querySelector('.back-button');
+    var currentSurvice;
+    function giveServiceContainersEventListeners(){
+        for(let i = 0; i < allServiceContainers.length; i++){
+            giveServiceContainerEventListener(i);
+        }
+    }
+    function giveServiceContainerEventListener(index){
+        allServiceContainers[index].addEventListener('click', () => {
+            hideEle(allServicesOuterContainer);
+            hideEle(categoryContainer);
+            showEle(focousContainer);
+            currentSurvice = currentCategory.getAllServices()[index];
+            populateFocusContainer();
+        });
+    }
+    function populateFocusContainer(){
+        //Geting data
+        var serviceName = currentSurvice.getName();
+        var serviceHeaderDescriptionText = currentSurvice.getDescriptionHeader();
+        var serviceDescriptionText = currentSurvice.getDescription();
+        var serviceQuantitieNumber = currentSurvice.getQuantity();
 
+        //Seting data
+        focusServiceName.innerText = serviceName;
+        serviceHeaderDescription.innerText = serviceHeaderDescriptionText;
+        serviceDescription.innerText = serviceDescriptionText;
+        serviceQuantitie.value = serviceQuantitieNumber;
+    }
+    function hideEle(ele){
+        if(!ele.classList.contains('display-none')){
+            ele.classList.add('display-none');
+        }
+    }
+    function showEle(ele){
+        while(ele.classList.contains('display-none')){
+            ele.classList.remove('display-none');
+        }
+    }
+    backButton.addEventListener('click', () => {
+        hideEle(focousContainer);
+        showEle(allServicesOuterContainer);
+        showEle(categoryContainer);
+    });
+    serviceQuantitie.addEventListener('click', () => {
+        var newQuantity = serviceQuantitie.value;
+        currentSurvice.setQuantity(newQuantity);
+        updatePriceContainer();
+    });
+//#endregion
 //Init HTML
 (function(){
     updateServiceContainers(wallCeilingCoveringCategory);
-    updatePriceContainer()
+    updatePriceContainer();
+    giveServiceContainersEventListeners();
 })();
