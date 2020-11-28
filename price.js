@@ -482,7 +482,6 @@
         for(let i = 0; i < allCategoryButtons.length; i++){
             allCategoryButtons[i].addEventListener('click', () => {
                 var ele = allCategoryButtons[i];
-                addSelectedToElement(ele);
                 hideAllServices();
             });
         }
@@ -513,13 +512,14 @@
     //#endregion
     //#region helper functions
         function updateServiceContainers(servaceCategory){
+            setCurrentServiceCategoryAndIndex(servaceCategory);
+            questionnaireInit();
+            focusService(currentSurvice);
+        }
+        function setCurrentServiceCategoryAndIndex(servaceCategory){
             currentCategory = servaceCategory;
-            var allServies = servaceCategory.getAllServices();
-            var serviceLength = allServies.length;
-            for(var i = 0; i < serviceLength; i++){
-                showService(i);
-                allServiceNames[i].innerText = allServies[i].getName();
-            }
+            currentServiceIndex = 0;
+            currentSurvice = currentCategory.getAllServices()[0];
         }
         function removeSelectedFromAllCategorys(){
             for(var i = 0; i < allCategoryButtons.length; i++){
@@ -570,6 +570,13 @@
         function getTotalPrice(subTotal, tax){
             return (subTotal + tax);
         }
+        function resetQuantities(){
+            allCategorys.forEach(category => {
+                category.getAllServices().forEach(service => {
+                    service.setQuantity(0);
+                });
+            });
+        }
         function updatePriceContainer(){
             var subTotal = getSubTotalPrice();
             var tax = getTax(subTotal);
@@ -581,27 +588,39 @@
         }   
     //#endregion
 //#endregion
-//#region Service button functionality
+//#region Focus functionality
     var focousContainer = document.getElementsByClassName('pTool-focous-container')[0];
-    var allServicesOuterContainer = document.querySelector('.pTool-services-container');
     var categoryContainer = document.querySelector('.pTool-service-category-container');
     var backButton = document.querySelector('.back-button');
     var currentSurvice;
+    var currentServiceIndex;
     function giveServiceContainersEventListeners(){
         for(let i = 0; i < allServiceContainers.length; i++){
             giveServiceContainerEventListener(i);
         }
     }
-    function giveServiceContainerEventListener(index){
-        allServiceContainers[index].addEventListener('click', () => {
-            hideEle(allServicesOuterContainer);
-            hideEle(categoryContainer);
-            showEle(focousContainer);
-            currentSurvice = currentCategory.getAllServices()[index];
-            populateFocusContainer();
-        });
+    function initilizeFocusContainer(){
+        hideEle(categoryContainer);
+        showEle(focousContainer);
+    }
+    function focusService(currentSurvice){
+        initilizeFocusContainer();
+
+        //Geting data
+        var serviceName = currentSurvice.getName();
+        var serviceHeaderDescriptionText = currentSurvice.getDescriptionHeader();
+        var serviceDescriptionText = currentSurvice.getDescription();
+        var serviceQuantitieNumber = currentSurvice.getQuantity();
+
+        //Seting data
+        focusServiceName.innerText = serviceName;
+        serviceHeaderDescription.innerText = serviceHeaderDescriptionText;
+        serviceDescription.innerText = serviceDescriptionText;
+        serviceQuantitie.value = serviceQuantitieNumber;
     }
     function populateFocusContainer(){
+        initilizeFocusContainer();
+
         //Geting data
         var serviceName = currentSurvice.getName();
         var serviceHeaderDescriptionText = currentSurvice.getDescriptionHeader();
@@ -624,20 +643,54 @@
             ele.classList.remove('display-none');
         }
     }
-    backButton.addEventListener('click', () => {
+    backButton.addEventListener('click', returnToMain);
+    function returnToMain(){
         hideEle(focousContainer);
-        showEle(allServicesOuterContainer);
         showEle(categoryContainer);
-    });
+        resetQuantities();
+        updatePriceContainer();
+    }
     serviceQuantitie.addEventListener('click', () => {
         var newQuantity = serviceQuantitie.value;
         currentSurvice.setQuantity(newQuantity);
         updatePriceContainer();
     });
 //#endregion
+//#region questionnaire functionality
+    var nextButton = document.querySelector('.pTool-service-button-next');
+    var focusContainers = document.querySelectorAll('.service-grid-container-focus');
+
+    nextButton.addEventListener('click', nextQuestionnaire);
+
+    function nextQuestionnaire(){
+        if((currentServiceIndex + 1) < currentCategory.getAllServices().length){
+            currentServiceIndex += 1;
+            updateCurrentServiceAfterIndexChange();
+            populateFocusContainer();
+            
+        }
+        else if((currentServiceIndex + 1) === currentCategory.getAllServices().length){
+            questionnaireFinishedSceen();
+            currentServiceIndex += 1
+        }
+        else{
+            returnToMain();
+        }
+    }
+    function questionnaireInit(){
+        showEle(focusContainers[1]);
+        showEle(serviceQuantitie);
+    }
+    function questionnaireFinishedSceen(){
+        focusServiceName.innerText = 'The cost for your reqested service(s) is below';
+        hideEle(focusContainers[1]);
+        hideEle(serviceQuantitie);
+    }
+    function updateCurrentServiceAfterIndexChange(){
+        currentSurvice = currentCategory.getAllServices()[currentServiceIndex];
+    }
+//#endregion
 //Init HTML
 (function(){
-    updateServiceContainers(wallCeilingCoveringCategory);
     updatePriceContainer();
-    giveServiceContainersEventListeners();
 })();
