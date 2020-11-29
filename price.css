@@ -17,13 +17,14 @@ body{
     display: flex;
     border: 0.12rem solid lightslategray;
     box-sizing: border-box;
+    flex-wrap: wrap;
 }
 .category-cube{
     height: 3rem;
     padding: 0.1%;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
-    width: 6%;
+    width: 4rem;
     border: 0.12rem solid lightslategray;
     margin: 0.5%;
     display: flex;
@@ -150,7 +151,7 @@ body{
     box-sizing: border-box;
     height: 5rem;
     margin-left: auto;
-    width: 20%;
+    width: 10rem;
     border: 0.12rem solid lightslategray;
     display: flex;
     flex-direction: column;
@@ -174,6 +175,9 @@ body{
 }
 .flex-direction-row{
     flex-direction: row !important;
+}
+.margin-top-1{
+    margin-top: 1rem !important;
 }
 .pTool-service-button-next{
     height: fit-content;
@@ -202,3 +206,10 @@ body{
 .pTool-Input{
     height: auto !important;
 }
+
+@media only screen and (max-width: 500px) {
+    .pTool-total-inner-container {
+      width: 100%;
+      margin-top: 1rem;
+    }
+  }

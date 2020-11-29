@@ -647,18 +647,23 @@
     function returnToMain(){
         hideEle(focousContainer);
         showEle(categoryContainer);
+        hideEle(pricContainer);
+        removeMTop1(nextButton);
         resetQuantities();
         updatePriceContainer();
     }
-    serviceQuantitie.addEventListener('click', () => {
+    serviceQuantitie.addEventListener('click', quantityValueChange);
+
+    function quantityValueChange(){
         var newQuantity = serviceQuantitie.value;
         currentSurvice.setQuantity(newQuantity);
         updatePriceContainer();
-    });
+    }
 //#endregion
 //#region questionnaire functionality
     var nextButton = document.querySelector('.pTool-service-button-next');
     var focusContainers = document.querySelectorAll('.service-grid-container-focus');
+    var pricContainer = document.querySelector('.pTool-price-container');
 
     nextButton.addEventListener('click', nextQuestionnaire);
 
@@ -671,7 +676,7 @@
         }
         else if((currentServiceIndex + 1) === currentCategory.getAllServices().length){
             questionnaireFinishedSceen();
-            currentServiceIndex += 1
+            currentServiceIndex += 1;
         }
         else{
             returnToMain();
@@ -680,14 +685,25 @@
     function questionnaireInit(){
         showEle(focusContainers[1]);
         showEle(serviceQuantitie);
+        hideEle(pricContainer);
     }
     function questionnaireFinishedSceen(){
         focusServiceName.innerText = 'The cost for your reqested service(s) is below';
+        giveMTop1(nextButton);
         hideEle(focusContainers[1]);
         hideEle(serviceQuantitie);
+        showEle(pricContainer);
     }
     function updateCurrentServiceAfterIndexChange(){
         currentSurvice = currentCategory.getAllServices()[currentServiceIndex];
+    }
+    function giveMTop1(ele){
+        ele.classList.add('margin-top-1');
+    }
+    function removeMTop1(ele){
+        while(ele.classList.contains('margin-top-1')){
+            ele.classList.remove('margin-top-1');
+        }
     }
 //#endregion
 //Init HTML
