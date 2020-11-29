@@ -207,6 +207,12 @@ body{
     height: auto !important;
 }
 
+@media only screen and (max-width: 700px) {
+    .pTool-quantity-input{
+        width: 40%;
+    }
+  }
+
 @media only screen and (max-width: 500px) {
     .pTool-total-inner-container {
       width: 100%;
