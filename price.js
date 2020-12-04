@@ -455,7 +455,16 @@
         heatingAirConditioningCategory
     ]
 //#endregion
-//#region Category button functionality
+//#region Declorations
+    //#region Finding service elements
+        var allServiceNames = document.getElementsByClassName('pTool-service-text-name');
+
+        var questionnaireServiceName = document.querySelector('.pTool-service-text-name-questionnaire');
+        var serviceHeaderDescription = document.getElementsByClassName('pTool-service-description-header')[0];
+        var serviceDescription = document.getElementsByClassName('pTool-service-text-description')[0];
+        var serviceQuantitie = document.getElementsByClassName('pTool-quantity-input')[0];
+        var servicePrice = document.getElementsByClassName('pTool-service-price-text')[0];
+    //#endregion
     //#region Finding all categroy buttons
         var allCategoryButtons = document.getElementsByClassName('category-cube');
         var wallCeilingCoveringButton = allCategoryButtons[0];
@@ -467,22 +476,34 @@
         var masonryButton = allCategoryButtons[6];
         var heatingAirConditioningButton = allCategoryButtons[7];
     //#endregion
-    //#region Finding service elements
-        var allServiceNames = document.getElementsByClassName('pTool-service-text-name');
+    var allServiceContainers = document.getElementsByClassName('pTool-service-container');
+    var currentCategory;
 
-        var focusServiceName = document.querySelector('.pTool-service-text-name-focus');
-        var serviceHeaderDescription = document.getElementsByClassName('pTool-service-description-header')[0];
-        var serviceDescription = document.getElementsByClassName('pTool-service-text-description')[0];
-        var serviceQuantitie = document.getElementsByClassName('pTool-quantity-input')[0];
-        var servicePrice = document.getElementsByClassName('pTool-service-price-text')[0];
+    var subTotalEle = document.querySelector('.pTool-subTotal-dollars');
+    var taxEle = document.querySelector('.pTool-tax-dollars');
+    var totalEle = document.querySelector('.pTool-total-dollars');
+
+    var questionnaireContainer = document.getElementsByClassName('pTool-questionnaire-container')[0];
+    var categoryContainer = document.querySelector('.pTool-service-category-container');
+    var backButton = document.querySelector('.back-button');
+    var currentSurvice;
+    var currentServiceIndex;
+
+    var nextButton = document.querySelector('.pTool-service-button-next');
+    var questionnaireContainers = document.querySelectorAll('.service-grid-container-questionnaire');
+    var pricContainer = document.querySelector('.pTool-price-container');
+
+    //#region Decision elements
+        var desitionTotal = document.getElementById('p-tool-decition-total');
+        var decisionContainer = document.querySelector('.pTool-decision-container');
     //#endregion
-     var allServiceContainers = document.getElementsByClassName('pTool-service-container');
-     var currentCategory;
+//#endregion
+//#region Category button functionality
     //#region click functions
         for(let i = 0; i < allCategoryButtons.length; i++){
             allCategoryButtons[i].addEventListener('click', () => {
-                var ele = allCategoryButtons[i];
                 hideAllServices();
+                questionnaireInit();
             });
         }
         wallCeilingCoveringButton.addEventListener('click', () => {
@@ -513,8 +534,7 @@
     //#region helper functions
         function updateServiceContainers(servaceCategory){
             setCurrentServiceCategoryAndIndex(servaceCategory);
-            questionnaireInit();
-            focusService(currentSurvice);
+            questionnaireService(currentSurvice);
         }
         function setCurrentServiceCategoryAndIndex(servaceCategory){
             currentCategory = servaceCategory;
@@ -547,9 +567,6 @@
     //#endregion
 //#endregion
 //#region Price functionality
-    var subTotalEle = document.querySelector('.pTool-subTotal-dollars');
-    var taxEle = document.querySelector('.pTool-tax-dollars');
-    var totalEle = document.querySelector('.pTool-total-dollars');
     //#region Helper functions
         function getSubTotalPrice(){
             var subTotal = 0;
@@ -570,6 +587,11 @@
         function getTotalPrice(subTotal, tax){
             return (subTotal + tax);
         }
+        function getTotalPriceStandAlone(){
+            var subTotal = getSubTotalPrice();
+            var tax = getTax(subTotal);
+            return getTotalPrice(subTotal, tax);
+        }
         function resetQuantities(){
             allCategorys.forEach(category => {
                 category.getAllServices().forEach(service => {
@@ -588,23 +610,55 @@
         }   
     //#endregion
 //#endregion
-//#region Focus functionality
-    var focousContainer = document.getElementsByClassName('pTool-focous-container')[0];
-    var categoryContainer = document.querySelector('.pTool-service-category-container');
-    var backButton = document.querySelector('.back-button');
-    var currentSurvice;
-    var currentServiceIndex;
+//#region questionnaire functionality
+    nextButton.addEventListener('click', nextQuestionnaire);
+    backButton.addEventListener('click', returnToMain);
+    serviceQuantitie.addEventListener('click', quantityValueChange);
+
+    //Todo Add main changes here
+    function nextQuestionnaire(){
+        if((currentServiceIndex + 1) < currentCategory.getAllServices().length){
+            currentServiceIndex += 1;
+            updateCurrentServiceAfterIndexChange();
+            populatequestionnaireContainer();
+        }
+        else if((currentServiceIndex + 1) === currentCategory.getAllServices().length){
+            showDecisionPage()
+        }
+    }
+    function showDecisionPage(){
+        hideAllElements();
+        showEle(pricContainer);
+        showEle(decisionContainer);
+        desitionTotal.innerText = getTotalPriceStandAlone();
+    }
+    function questionnaireInit(){
+        //Todo add hide all function
+        showEle(questionnaireContainers[1]);
+        showEle(serviceQuantitie);
+        hideEle(pricContainer);
+    }
+    function questionnaireFinishedSceen(){
+        questionnaireServiceName.innerText = 'The cost for your reqested service(s) is below';
+        giveMTop1(nextButton);
+        hideEle(questionnaireContainers[1]);
+        hideEle(serviceQuantitie);
+        showEle(pricContainer);
+    }
+    function updateCurrentServiceAfterIndexChange(){
+        currentSurvice = currentCategory.getAllServices()[currentServiceIndex];
+    }
     function giveServiceContainersEventListeners(){
         for(let i = 0; i < allServiceContainers.length; i++){
             giveServiceContainerEventListener(i);
         }
     }
-    function initilizeFocusContainer(){
+    function initilizequestionnaireContainer(){
         hideEle(categoryContainer);
-        showEle(focousContainer);
+        showEle(questionnaireContainer);
     }
-    function focusService(currentSurvice){
-        initilizeFocusContainer();
+    function questionnaireService(currentSurvice){
+        initilizequestionnaireContainer();
 
         //Geting data
         var serviceName = currentSurvice.getName();
@@ -613,13 +667,13 @@
         var serviceQuantitieNumber = currentSurvice.getQuantity();
 
         //Seting data
-        focusServiceName.innerText = serviceName;
+        questionnaireServiceName.innerText = serviceName;
         serviceHeaderDescription.innerText = serviceHeaderDescriptionText;
         serviceDescription.innerText = serviceDescriptionText;
         serviceQuantitie.value = serviceQuantitieNumber;
     }
-    function populateFocusContainer(){
-        initilizeFocusContainer();
+    function populatequestionnaireContainer(){
+        initilizequestionnaireContainer();
 
         //Geting data
         var serviceName = currentSurvice.getName();
@@ -628,10 +682,42 @@
         var serviceQuantitieNumber = currentSurvice.getQuantity();
 
         //Seting data
-        focusServiceName.innerText = serviceName;
+        questionnaireServiceName.innerText = serviceName;
         serviceHeaderDescription.innerText = serviceHeaderDescriptionText;
         serviceDescription.innerText = serviceDescriptionText;
         serviceQuantitie.value = serviceQuantitieNumber;
+    }
+    function returnToMain(){
+        hideAllElements();
+        showEle(categoryContainer);
+        removeMTop1(nextButton);
+        resetQuantities();
+        updatePriceContainer();
+    }
+
+    function quantityValueChange(){
+        var newQuantity = serviceQuantitie.value;
+        currentSurvice.setQuantity(newQuantity);
+        updatePriceContainer();
+    }
+//#endregion
+//#region Helper functions
+    function hideAllElements(){
+        hideEle(categoryContainer);
+        hideEle(pricContainer);
+        hideEle(decisionContainer);
+        hideEle(questionnaireContainer);
+    }
+    function hidequestionnaire(){
+        hideEle(questionnaireContainer);
+    }
+    function giveMTop1(ele){
+        ele.classList.add('margin-top-1');
+    }
+    function removeMTop1(ele){
+        while(ele.classList.contains('margin-top-1')){
+            ele.classList.remove('margin-top-1');
+        }
     }
     function hideEle(ele){
         if(!ele.classList.contains('display-none')){
@@ -643,69 +729,8 @@
             ele.classList.remove('display-none');
         }
     }
-    backButton.addEventListener('click', returnToMain);
-    function returnToMain(){
-        hideEle(focousContainer);
-        showEle(categoryContainer);
-        hideEle(pricContainer);
-        removeMTop1(nextButton);
-        resetQuantities();
-        updatePriceContainer();
-    }
-    serviceQuantitie.addEventListener('click', quantityValueChange);
-
-    function quantityValueChange(){
-        var newQuantity = serviceQuantitie.value;
-        currentSurvice.setQuantity(newQuantity);
-        updatePriceContainer();
-    }
 //#endregion
-//#region questionnaire functionality
-    var nextButton = document.querySelector('.pTool-service-button-next');
-    var focusContainers = document.querySelectorAll('.service-grid-container-focus');
-    var pricContainer = document.querySelector('.pTool-price-container');
 
-    nextButton.addEventListener('click', nextQuestionnaire);
-
-    function nextQuestionnaire(){
-        if((currentServiceIndex + 1) < currentCategory.getAllServices().length){
-            currentServiceIndex += 1;
-            updateCurrentServiceAfterIndexChange();
-            populateFocusContainer();
-            
-        }
-        else if((currentServiceIndex + 1) === currentCategory.getAllServices().length){
-            questionnaireFinishedSceen();
-            currentServiceIndex += 1;
-        }
-        else{
-            returnToMain();
-        }
-    }
-    function questionnaireInit(){
-        showEle(focusContainers[1]);
-        showEle(serviceQuantitie);
-        hideEle(pricContainer);
-    }
-    function questionnaireFinishedSceen(){
-        focusServiceName.innerText = 'The cost for your reqested service(s) is below';
-        giveMTop1(nextButton);
-        hideEle(focusContainers[1]);
-        hideEle(serviceQuantitie);
-        showEle(pricContainer);
-    }
-    function updateCurrentServiceAfterIndexChange(){
-        currentSurvice = currentCategory.getAllServices()[currentServiceIndex];
-    }
-    function giveMTop1(ele){
-        ele.classList.add('margin-top-1');
-    }
-    function removeMTop1(ele){
-        while(ele.classList.contains('margin-top-1')){
-            ele.classList.remove('margin-top-1');
-        }
-    }
-//#endregion
 //Init HTML
 (function(){
     updatePriceContainer();

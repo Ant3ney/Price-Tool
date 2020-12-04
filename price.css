@@ -63,7 +63,18 @@ body{
     margin-right: 3%;
     height: 2rem;
 }
-.service-grid-container-focus{
+.name-grid-container{
+    margin-left: 3%;
+    margin-right: 3%;
+    width: 20%;
+    height: 2rem;
+}
+.name-grid-receipt-container{
+    height: auto;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+.service-grid-container-questionnaire{
     margin-left: 3%;
     margin-right: 3%;
 }
@@ -71,9 +82,20 @@ body{
     margin-left: 2%;
     width: 70%;
 }
+.description-grid-receipt-container{
+    width: 100% !important;
+}
+.quantity-grid-receipt-container{
+    width: auto !important;
+    max-width: 20%;
+    margin-right: 1%;
+}
 .quantity-grid-container{
     margin-left: 1%;
     width: 10%;
+}
+.pTool-quantity-receipt-receipt-input{
+    width: -webkit-fill-available !important;
 }
 .price-grid-container{
     margin-left: 0%; /* 10% */
@@ -92,9 +114,17 @@ body{
     display: flex;
     flex-direction: column;
 }
+.pTool-recipts-container{
+    display: flex;
+    flex-direction: column;
+}
 .pTool-service-container{
     display: flex;
     flex-direction: column;
+}
+.pTool-recipt-container{
+    display: flex;
+    flex-direction: row;
 }
 .pTool-make-bg-light-blue{
     background-color:  #E0E2E8;
@@ -103,6 +133,9 @@ body{
 .pTool-service-col{
     display: flex;
     flex-direction: column;
+}
+.pTool-receipt-col{
+
 }
 .pTool-service-text{
     font-size: 0.75rem;
@@ -114,7 +147,7 @@ body{
     font-size: 1rem;
     text-decoration: underline;
 }
-.pTool-service-text-name-focus{
+.pTool-service-text-name-questionnaire{
     margin-top: auto;
     margin-bottom: auto;
     font-size: 1.75rem;
@@ -127,6 +160,10 @@ body{
     font-size: 2rem;
     width: 10%;
     text-align: right;
+}
+.pTool-quantity-receipt-input{
+    width: auto;
+    margin-right: 6%;
 }
 .pTool-service-text-large{
     margin: auto;
@@ -190,6 +227,31 @@ body{
     border: 0;
     border-radius: 0.5rem;
 }
+.styled-with-button-red-bg{
+    height: fit-content;
+    padding: 0.5rem;
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color:  #DD5962;
+    color: white;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border: 0;
+    border-radius: 0.5rem;
+}
+.styled-with-button-red-outline{
+    height: fit-content;
+    padding: 0.5rem;
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color: white;
+    color: #DD5962;
+    border: 0.12rem solid #DD5962 !important;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border: 0;
+    border-radius: 0.5rem;
+}
 
 .custum-svg-icon{
     min-width: 70%;
@@ -198,12 +260,26 @@ body{
     max-height: 50%;
     margin-bottom: 0.12rem;
 }
-.pTool-focous-container{
+.pTool-questionnaire-container{
     display: flex;
     flex-direction: column;
 }
 .pTool-Input{
     height: auto !important;
+}
+
+/* Decision CSS */
+.pTool-decision-lower-container{
+    display: flex;
+}
+.pTool-decision-title-text{
+    margin-right: auto;
+}
+.p-tool-decition-show-receipt-button{
+    margin-right: 1rem;
+}
+.p-tool-decition-email-receipt-button{
+
 }
 
 @media only screen and (max-width: 700px) {

@@ -61,24 +61,84 @@
             </div>
         </div>
         
-        <!-- Focus Container Start-->
-        <div class="pTool-focous-container display-none">
+        <!-- questionnaire Container Start-->
+        <div class="pTool-questionnaire-container display-none">
             <div class="back-button pTool-service-col">
                 <p><i class="fas fa-arrow-left"></i>&nbspBack</p>
             </div>
-            <div class="service-grid-container-focus pTool-service-col">
-                <p class="pTool-service-text pTool-service-text-name-focus">Wall / Ceiling Covering item placeholder 05</p>
+            <div class="service-grid-container-questionnaire pTool-service-col">
+                <p class="pTool-service-text pTool-service-text-name-questionnaire">Wall / Ceiling Covering item placeholder 05</p>
             </div>
-            <div class="service-grid-container-focus pTool-service-col">
+            <div class="service-grid-container-questionnaire pTool-service-col">
                 <p class="pTool-service-description-header">Ceiling Repair</p>
                 <p class="pTool-service-text pTool-service-text-description">Vestibulum imperdiet consequat hendrerit. Nunc tortor risus, facilisis efficitur elit ut, malesuada lobortis erat. Quisque laoreet interdum elementum. Sed eget sagittis sem.</p>
             </div>
-            <div class="service-grid-container-focus pTool-service-col flex-direction-row">
+            <div class="service-grid-container-questionnaire pTool-service-col flex-direction-row">
                 <input class="pTool-quantity-input" type="number" onchange="quantityValueChange()"/>
                 <button class="pTool-service-text pTool-service-button-next">Next</button>
             </div>
         </div>
-        <!-- Focus Container End-->
+        <!-- questionnaire Container End-->
+        <!-- Decision Container Start -->
+        <div class="pTool-decision-container display-none">
+            <div class="pTool-decision-title-container">
+                <p class="pTool-decision-title-text">Your cost is below</p>
+            </div>
+            <div class="pTool-decision-lower-container">
+                <p class="pTool-decision-title-text">Total: $<span id="p-tool-decition-total">22,000</span></p>
+                <button class="p-tool-decition-show-receipt-button styled-with-button-red-bg">Show Receipt</button>
+                <button class="p-tool-decition-email-receipt-button styled-with-button-red-outline">Email Receipt</button>
+            </div>
+        </div>
+        <!-- Decision Container End -->
+        <!-- Recipt Container Start -->
+        <div class="pTool-recipts-container">
+
+            <!-- A receipt container-->
+            <div class="pTool-recipt-container">
+                <div class="name-grid-container pTool-service-col name-grid-receipt-container">
+                    <p class="pTool-service-text pTool-service-text-name">Wall / Ceiling Covering item placeholder 01</p>
+                </div>
+                <div class="description-grid-container pTool-service-col description-grid-receipt-container">
+                    <p class="pTool-service-description-header">Ceiling Repair</p>
+                    <p class="pTool-service-text pTool-service-text-description">Vestibulum imperdiet consequat hendrerit. Nunc tortor risus, facilisis efficitur elit ut, malesuada lobortis erat. Quisque laoreet interdum elementum. Sed eget sagittis sem.</p>
+                </div>
+                <div class="quantity-grid-container pTool-service-col quantity-grid-receipt-container">
+                    <input class="pTool-quantity-input pTool-quantity-receipt-receipt-input" type="number">
+                </div>
+                <div class="price-grid-container pTool-service-col">
+                    <p class="pTool-service-text-large pTool-service-price-text display-none">$60</p>
+                </div>
+                </div> 
+            </div>
+
+            <!-- A receipt container-->
+            <div class="pTool-recipt-container pTool-make-bg-light-blue">
+                <div class="name-grid-container pTool-service-col name-grid-receipt-container">
+                    <p class="pTool-service-text pTool-service-text-name">Wall / Ceiling Covering item placeholder 01</p>
+                </div>
+                <div class="description-grid-container pTool-service-col description-grid-receipt-container">
+                    <p class="pTool-service-description-header">Ceiling Repair</p>
+                    <p class="pTool-service-text pTool-service-text-description">Vestibulum imperdiet consequat hendrerit. Nunc tortor risus, facilisis efficitur elit ut, malesuada lobortis erat. Quisque laoreet interdum elementum. Sed eget sagittis sem.</p>
+                </div>
+                <div class="quantity-grid-container pTool-service-col quantity-grid-receipt-container">
+                    <input class="pTool-quantity-input pTool-quantity-receipt-receipt-input" type="number">
+                </div>
+                <div class="price-grid-container pTool-service-col">
+                    <p class="pTool-service-text-large pTool-service-price-text display-none">$60</p>
+                </div>
+                </div> 
+            </div>
+        </div>
+        <!-- Recipt Container End -->
+
+        <!-- Email Input Container Start -->
+        <!-- Email Input Container End -->
+
+        <!-- Email Recipt Container Start -->
+        <!-- Email Recipt Container End -->
+
+        <!-- Price container start -->
         <div class="pTool-price-container display-none">
             <div class="pTool-total-inner-container">
                 <div class="pTool-totla-col">
@@ -101,6 +161,7 @@
                 </div>
             </div>
         </div>
+        <!-- Price container end -->
     </div>
     <script src="./price.js"></script>
 </body>
