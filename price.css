@@ -73,6 +73,7 @@ body{
     height: auto;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
+    min-width: 10% !important;
 }
 .service-grid-container-questionnaire{
     margin-left: 3%;
@@ -84,11 +85,15 @@ body{
 }
 .description-grid-receipt-container{
     width: 100% !important;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 .quantity-grid-receipt-container{
     width: auto !important;
-    max-width: 20%;
+    max-width: 10%;
     margin-right: 1%;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 .quantity-grid-container{
     margin-left: 1%;
@@ -96,6 +101,11 @@ body{
 }
 .pTool-quantity-receipt-receipt-input{
     width: -webkit-fill-available !important;
+}
+.pTool-receipt-col-conclusion{
+    display: flex;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 .price-grid-container{
     margin-left: 0%; /* 10% */
@@ -145,7 +155,9 @@ body{
     margin-top: auto;
     margin-bottom: auto;
     font-size: 1rem;
-    text-decoration: underline;
+}
+.pTool-text-receipt-name{
+    font-size: 12px !important;
 }
 .pTool-service-text-name-questionnaire{
     margin-top: auto;
@@ -282,6 +294,38 @@ body{
 
 }
 
+/* Email input CSS */
+.pTool-email-input-container{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+.pTool-email-input-row{
+    display: flex;
+}
+.pTool-email-input-title{
+    margin-bottom: 1rem;
+}
+.pTool-email-input{
+    display: flex;
+}
+.pTool-email-input{
+    width: 100%;
+    margin-right: 1%;
+}
+
+/* Email confirmation CSS */
+
+.pTool-email-confirmation-container{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.pTool-email-confirmation-title{
+    margin-bottom: 1rem;
+}
+
 @media only screen and (max-width: 700px) {
     .pTool-quantity-input{
         width: 20%;
@@ -295,5 +339,8 @@ body{
     }
     .pTool-quantity-input{
         width: 50%;
+    }
+    .quantity-grid-receipt-container{
+        max-width: 20%;
     }
   }

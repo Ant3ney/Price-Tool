@@ -496,10 +496,34 @@
     //#region Decision elements
         var desitionTotal = document.getElementById('p-tool-decition-total');
         var decisionContainer = document.querySelector('.pTool-decision-container');
+        var showReciptButton = document.querySelector('.p-tool-decition-show-receipt-button');
+        var emailReciptButton = document.querySelector('.p-tool-decition-email-receipt-button');
+    //#endregion
+
+    //#region Receipt elements
+        var receiptContainer = document.querySelector('.pTool-recipts-container');
+        var receiptNext = document.querySelector('.pTool-receipt-next');
+        var reciptServiceContainers = document.getElementsByClassName('pTool-recipt-container');
+        var reciptServiceNames = document.getElementsByClassName('pTool-text-receipt-name');
+        var reciptServiceDescriptionHeaders = document.getElementsByClassName('pTool-service-receipt-description-header');
+        var reciptServiceDescriptions = document.getElementsByClassName('pTool-service-receipt-description');
+        var reciptServiceQuantitys = document.getElementsByClassName('pTool-quantity-receipt-receipt-input');
+    //#endregion
+
+    //#region Email input elements
+        var emailInputContainer = document.querySelector('.pTool-email-input-container');
+        var emailInput = document.querySelector('.pTool-email-input');
+        var emailSubmit = document.querySelector('.pTool-email-input-button');
+    //#endregion
+
+    //#region Email confermation elements
+        var emailConfermationContainer = document.querySelector('.pTool-email-confirmation-container');
+        var emailConfermationNext = document.querySelector('.pTool-email-confirmation-button');
     //#endregion
 //#endregion
-//#region Category button functionality
-    //#region click functions
+
+//#region Click listeners
+    //#region Category listeners
         for(let i = 0; i < allCategoryButtons.length; i++){
             allCategoryButtons[i].addEventListener('click', () => {
                 hideAllServices();
@@ -531,7 +555,29 @@
             updateServiceContainers(heatingAirConditioningCategory);
         });
     //#endregion
-    //#region helper functions
+    //Decition listeners
+    showReciptButton.addEventListener('click', () => {
+        navigateTo([receiptContainer, pricContainer]);
+    });
+    emailReciptButton.addEventListener('click', () => {
+        navigateTo(emailInputContainer);
+    });
+    //Receipt listeners
+    receiptNext.addEventListener('click', () => {
+        returnToMain();
+    });
+    //Email input listeners
+    emailSubmit.addEventListener('click', () => {
+        navigateTo(emailConfermationContainer);
+    });
+    //Email confermation listeners
+    emailConfermationNext.addEventListener('click', () => {
+        returnToMain();
+    })
+//#endregion
+
+//#region Category button functionality
+
         function updateServiceContainers(servaceCategory){
             setCurrentServiceCategoryAndIndex(servaceCategory);
             questionnaireService(currentSurvice);
@@ -564,7 +610,6 @@
                 allServiceContainers[n].classList.remove('display-none');
             }
         }
-    //#endregion
 //#endregion
 //#region Price functionality
     //#region Helper functions
@@ -615,7 +660,6 @@
     backButton.addEventListener('click', returnToMain);
     serviceQuantitie.addEventListener('click', quantityValueChange);
 
-    //Todo Add main changes here
     function nextQuestionnaire(){
         if((currentServiceIndex + 1) < currentCategory.getAllServices().length){
             currentServiceIndex += 1;
@@ -633,7 +677,7 @@
         desitionTotal.innerText = getTotalPriceStandAlone();
     }
     function questionnaireInit(){
-        //Todo add hide all function
+        hideAllElements();
         showEle(questionnaireContainers[1]);
         showEle(serviceQuantitie);
         hideEle(pricContainer);
@@ -707,7 +751,11 @@
         hideEle(pricContainer);
         hideEle(decisionContainer);
         hideEle(questionnaireContainer);
+        hideEle(receiptContainer);
+        hideEle(emailInputContainer);
+        hideEle(emailConfermationContainer);
     }
+
     function hidequestionnaire(){
         hideEle(questionnaireContainer);
     }
@@ -727,6 +775,17 @@
     function showEle(ele){
         while(ele.classList.contains('display-none')){
             ele.classList.remove('display-none');
+        }
+    }
+    function navigateTo(containers){
+        hideAllElements();
+        if(Array.isArray(containers)){
+            containers.forEach((container) => {
+                showEle(container)
+            });
+        }
+        else{
+            showEle(containers);
         }
     }
 //#endregion

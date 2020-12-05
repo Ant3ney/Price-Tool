@@ -92,16 +92,30 @@
         </div>
         <!-- Decision Container End -->
         <!-- Recipt Container Start -->
-        <div class="pTool-recipts-container">
-
-            <!-- A receipt container-->
+        <div class="pTool-recipts-container display-none">
+            <!-- Receipt Table header-->
+            <div class="service-headers-outer-container">
+                <div class="name-grid-container pTool-service-col header-container name-grid-receipt-container">
+                    <p class="service-header">Service</p>
+                </div>
+                <div class="header-container description-grid-container description-grid-receipt-container">
+                    <p class="service-header">Description</p>
+                </div>
+                <div class="header-container quantity-grid-container quantity-grid-receipt-container">
+                    <p class="service-header">Quantity</p>
+                </div>
+                <div class="header-container price-grid-container display-none">
+                    <p class="service-header">price</p>
+                </div>
+            </div>
+            <!-- A receipt item-->
             <div class="pTool-recipt-container">
                 <div class="name-grid-container pTool-service-col name-grid-receipt-container">
-                    <p class="pTool-service-text pTool-service-text-name">Wall / Ceiling Covering item placeholder 01</p>
+                    <p class="pTool-service-text pTool-service-text-name pTool-text-receipt-name">Wall / Ceiling Covering item placeholder 01</p>
                 </div>
                 <div class="description-grid-container pTool-service-col description-grid-receipt-container">
-                    <p class="pTool-service-description-header">Ceiling Repair</p>
-                    <p class="pTool-service-text pTool-service-text-description">Vestibulum imperdiet consequat hendrerit. Nunc tortor risus, facilisis efficitur elit ut, malesuada lobortis erat. Quisque laoreet interdum elementum. Sed eget sagittis sem.</p>
+                    <p class="pTool-service-description-header pTool-service-receipt-description-header">Ceiling Repair</p>
+                    <p class="pTool-service-text pTool-service-text-description pTool-service-receipt-description">Vestibulum imperdiet consequat hendrerit. Nunc tortor risus, facilisis efficitur elit ut, malesuada lobortis erat. Quisque laoreet interdum elementum. Sed eget sagittis sem.</p>
                 </div>
                 <div class="quantity-grid-container pTool-service-col quantity-grid-receipt-container">
                     <input class="pTool-quantity-input pTool-quantity-receipt-receipt-input" type="number">
@@ -109,17 +123,16 @@
                 <div class="price-grid-container pTool-service-col">
                     <p class="pTool-service-text-large pTool-service-price-text display-none">$60</p>
                 </div>
-                </div> 
             </div>
 
-            <!-- A receipt container-->
+            <!-- A receipt item-->
             <div class="pTool-recipt-container pTool-make-bg-light-blue">
                 <div class="name-grid-container pTool-service-col name-grid-receipt-container">
-                    <p class="pTool-service-text pTool-service-text-name">Wall / Ceiling Covering item placeholder 01</p>
+                    <p class="pTool-service-text pTool-service-text-name pTool-text-receipt-name">Wall / Ceiling Covering item placeholder 01</p>
                 </div>
                 <div class="description-grid-container pTool-service-col description-grid-receipt-container">
-                    <p class="pTool-service-description-header">Ceiling Repair</p>
-                    <p class="pTool-service-text pTool-service-text-description">Vestibulum imperdiet consequat hendrerit. Nunc tortor risus, facilisis efficitur elit ut, malesuada lobortis erat. Quisque laoreet interdum elementum. Sed eget sagittis sem.</p>
+                    <p class="pTool-service-description-header pTool-service-receipt-description-header">Ceiling Repair</p>
+                    <p class="pTool-service-text pTool-service-text-description pTool-service-receipt-description">Vestibulum imperdiet consequat hendrerit. Nunc tortor risus, facilisis efficitur elit ut, malesuada lobortis erat. Quisque laoreet interdum elementum. Sed eget sagittis sem.</p>
                 </div>
                 <div class="quantity-grid-container pTool-service-col quantity-grid-receipt-container">
                     <input class="pTool-quantity-input pTool-quantity-receipt-receipt-input" type="number">
@@ -127,16 +140,138 @@
                 <div class="price-grid-container pTool-service-col">
                     <p class="pTool-service-text-large pTool-service-price-text display-none">$60</p>
                 </div>
-                </div> 
+            </div>
+
+            <!-- A receipt item-->
+            <div class="pTool-recipt-container">
+                <div class="name-grid-container pTool-service-col name-grid-receipt-container">
+                    <p class="pTool-service-text pTool-service-text-name pTool-text-receipt-name">Wall / Ceiling Covering item placeholder 01</p>
+                </div>
+                <div class="description-grid-container pTool-service-col description-grid-receipt-container">
+                    <p class="pTool-service-description-header pTool-service-receipt-description-header">Ceiling Repair</p>
+                    <p class="pTool-service-text pTool-service-text-description pTool-service-receipt-description">Vestibulum imperdiet consequat hendrerit. Nunc tortor risus, facilisis efficitur elit ut, malesuada lobortis erat. Quisque laoreet interdum elementum. Sed eget sagittis sem.</p>
+                </div>
+                <div class="quantity-grid-container pTool-service-col quantity-grid-receipt-container">
+                    <input class="pTool-quantity-input pTool-quantity-receipt-receipt-input" type="number">
+                </div>
+                <div class="price-grid-container pTool-service-col">
+                    <p class="pTool-service-text-large pTool-service-price-text display-none">$60</p>
+                </div>
+            </div>
+
+            <!-- A receipt item-->
+            <div class="pTool-recipt-container pTool-make-bg-light-blue">
+                <div class="name-grid-container pTool-service-col name-grid-receipt-container">
+                    <p class="pTool-service-text pTool-service-text-name pTool-text-receipt-name">Wall / Ceiling Covering item placeholder 01</p>
+                </div>
+                <div class="description-grid-container pTool-service-col description-grid-receipt-container">
+                    <p class="pTool-service-description-header pTool-service-receipt-description-header">Ceiling Repair</p>
+                    <p class="pTool-service-text pTool-service-text-description pTool-service-receipt-description">Vestibulum imperdiet consequat hendrerit. Nunc tortor risus, facilisis efficitur elit ut, malesuada lobortis erat. Quisque laoreet interdum elementum. Sed eget sagittis sem.</p>
+                </div>
+                <div class="quantity-grid-container pTool-service-col quantity-grid-receipt-container">
+                    <input class="pTool-quantity-input pTool-quantity-receipt-receipt-input" type="number">
+                </div>
+                <div class="price-grid-container pTool-service-col">
+                    <p class="pTool-service-text-large pTool-service-price-text display-none">$60</p>
+                </div>
+            </div>
+            
+            <!-- A receipt item-->
+            <div class="pTool-recipt-container">
+                <div class="name-grid-container pTool-service-col name-grid-receipt-container">
+                    <p class="pTool-service-text pTool-service-text-name pTool-text-receipt-name">Wall / Ceiling Covering item placeholder 01</p>
+                </div>
+                <div class="description-grid-container pTool-service-col description-grid-receipt-container">
+                    <p class="pTool-service-description-header pTool-service-receipt-description-header">Ceiling Repair</p>
+                    <p class="pTool-service-text pTool-service-text-description pTool-service-receipt-description">Vestibulum imperdiet consequat hendrerit. Nunc tortor risus, facilisis efficitur elit ut, malesuada lobortis erat. Quisque laoreet interdum elementum. Sed eget sagittis sem.</p>
+                </div>
+                <div class="quantity-grid-container pTool-service-col quantity-grid-receipt-container">
+                    <input class="pTool-quantity-input pTool-quantity-receipt-receipt-input" type="number">
+                </div>
+                <div class="price-grid-container pTool-service-col">
+                    <p class="pTool-service-text-large pTool-service-price-text display-none">$60</p>
+                </div>
+            </div>
+
+            <!-- A receipt item-->
+            <div class="pTool-recipt-container pTool-make-bg-light-blue">
+                <div class="name-grid-container pTool-service-col name-grid-receipt-container">
+                    <p class="pTool-service-text pTool-service-text-name pTool-text-receipt-name">Wall / Ceiling Covering item placeholder 01</p>
+                </div>
+                <div class="description-grid-container pTool-service-col description-grid-receipt-container">
+                    <p class="pTool-service-description-header pTool-service-receipt-description-header">Ceiling Repair</p>
+                    <p class="pTool-service-text pTool-service-text-description pTool-service-receipt-description">Vestibulum imperdiet consequat hendrerit. Nunc tortor risus, facilisis efficitur elit ut, malesuada lobortis erat. Quisque laoreet interdum elementum. Sed eget sagittis sem.</p>
+                </div>
+                <div class="quantity-grid-container pTool-service-col quantity-grid-receipt-container">
+                    <input class="pTool-quantity-input pTool-quantity-receipt-receipt-input" type="number">
+                </div>
+                <div class="price-grid-container pTool-service-col">
+                    <p class="pTool-service-text-large pTool-service-price-text display-none">$60</p>
+                </div>
+            </div>
+            <!-- A receipt item-->
+            <div class="pTool-recipt-container">
+                <div class="name-grid-container pTool-service-col name-grid-receipt-container">
+                    <p class="pTool-service-text pTool-service-text-name pTool-text-receipt-name">Wall / Ceiling Covering item placeholder 01</p>
+                </div>
+                <div class="description-grid-container pTool-service-col description-grid-receipt-container">
+                    <p class="pTool-service-description-header pTool-service-receipt-description-header">Ceiling Repair</p>
+                    <p class="pTool-service-text pTool-service-text-description pTool-service-receipt-description">Vestibulum imperdiet consequat hendrerit. Nunc tortor risus, facilisis efficitur elit ut, malesuada lobortis erat. Quisque laoreet interdum elementum. Sed eget sagittis sem.</p>
+                </div>
+                <div class="quantity-grid-container pTool-service-col quantity-grid-receipt-container">
+                    <input class="pTool-quantity-input pTool-quantity-receipt-receipt-input" type="number">
+                </div>
+                <div class="price-grid-container pTool-service-col">
+                    <p class="pTool-service-text-large pTool-service-price-text display-none">$60</p>
+                </div>
+            </div>
+
+            <!-- A receipt item-->
+            <div class="pTool-recipt-container pTool-make-bg-light-blue">
+                <div class="name-grid-container pTool-service-col name-grid-receipt-container">
+                    <p class="pTool-service-text pTool-service-text-name pTool-text-receipt-name">Wall / Ceiling Covering item placeholder 01</p>
+                </div>
+                <div class="description-grid-container pTool-service-col description-grid-receipt-container">
+                    <p class="pTool-service-description-header pTool-service-receipt-description-header">Ceiling Repair</p>
+                    <p class="pTool-service-text pTool-service-text-description pTool-service-receipt-description">Vestibulum imperdiet consequat hendrerit. Nunc tortor risus, facilisis efficitur elit ut, malesuada lobortis erat. Quisque laoreet interdum elementum. Sed eget sagittis sem.</p>
+                </div>
+                <div class="quantity-grid-container pTool-service-col quantity-grid-receipt-container">
+                    <input class="pTool-quantity-input pTool-quantity-receipt-receipt-input" type="number">
+                </div>
+                <div class="price-grid-container pTool-service-col">
+                    <p class="pTool-service-text-large pTool-service-price-text display-none">$60</p>
+                </div>
+            </div>
+
+            <div class="pTool-receipt-col-conclusion">
+                <p class="pTool-receipt-title pTool-service-text-large">Your total is below</p>
+                <button class="pTool-receipt-next styled-with-button-red-bg">Next</button>
             </div>
         </div>
         <!-- Recipt Container End -->
 
         <!-- Email Input Container Start -->
+        <div class="pTool-email-input-container display-none">
+            <div class="pTool-email-input-row pTool-email-input-title">
+                <p class="pTool-service-text-large">Please Enter your email below</p>
+            </div>
+            <div class="pTool-email-input-row">
+                <input class="pTool-email-input" type="email">
+                <button class="pTool-email-input-button styled-with-button-red-bg">Submit</button>
+            </div>
+        </div>
         <!-- Email Input Container End -->
 
-        <!-- Email Recipt Container Start -->
-        <!-- Email Recipt Container End -->
+        <!-- Email confirmation Container Start -->
+            <div class="pTool-email-confirmation-container display-none">
+                <div class="pTool-email-confirmation-row">
+                    <p class="pTool-email-confirmation-title pTool-service-text-large">An email has been sent to <span id="pTool-email-location">example@gmail.com</span></p>
+                </div>
+                <div class="pTool-email-confirmation-row">
+                    <button class="pTool-email-confirmation-button styled-with-button-red-bg">next</button>
+                </div>
+            </div>
+        <!-- Email confirmation Container End -->
 
         <!-- Price container start -->
         <div class="pTool-price-container display-none">
