@@ -556,9 +556,7 @@
         });
     //#endregion
     //Decition listeners
-    showReciptButton.addEventListener('click', () => {
-        navigateTo([receiptContainer, pricContainer]);
-    });
+    showReciptButton.addEventListener('click', showRecieptPage);
     emailReciptButton.addEventListener('click', () => {
         navigateTo(emailInputContainer);
     });
@@ -788,9 +786,51 @@
             showEle(containers);
         }
     }
+    function hideAllRecieptServiceItems(){
+        reciptServiceContainers.forEach((container) => {
+            hideEle(container);
+        });
+    }
+    function giveRecieptQuantityIntputsEventListeners(){
+        for(let i = 0; i < reciptServiceQuantitys.length; i++){
+            let input = reciptServiceQuantitys[i];
+            //let index = input.dataset
+            input.addEventListener('change', () => {
+                let currentSurvace = currentCategory.getAllServices()[i];
+                currentSurvace.setQuantity(input.value);
+                updatePriceContainer();
+            });
+        }
+    }
+    function populateRelevantRecieptServiceItems(){
+        for(let i = 0; i < reciptServiceContainers.length; i++) {
+            var currentSurvace = currentCategory.getAllServices()[i];
+            var max = currentCategory.getAllServices().length;
+            var container = reciptServiceContainers[i];
+            var nameEle = reciptServiceNames[i];
+            var headerEle = reciptServiceDescriptionHeaders[i];
+            var descriptionEle = reciptServiceDescriptions[i];
+            var inputEle = reciptServiceQuantitys[i];
+            if(i >=max){
+                hideEle(container);
+            }
+            else{
+                showEle(container);
+                nameEle.innerText = currentSurvace.getName();
+                headerEle.innerText = currentSurvace.getDescriptionHeader();
+                descriptionEle.innerText = currentSurvace.getDescription();
+                inputEle.value = currentSurvace.getQuantity();
+            }
+        };
+    }
+    function showRecieptPage(){
+        navigateTo([receiptContainer, pricContainer]);
+        populateRelevantRecieptServiceItems();
+    }
 //#endregion
 
 //Init HTML
 (function(){
     updatePriceContainer();
+    giveRecieptQuantityIntputsEventListeners();
 })();
