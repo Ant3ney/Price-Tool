@@ -514,11 +514,17 @@
         var emailInputContainer = document.querySelector('.pTool-email-input-container');
         var emailInput = document.querySelector('.pTool-email-input');
         var emailSubmit = document.querySelector('.pTool-email-input-button');
+        var emailErrorEle = document.getElementById('email-error');
+        var emailAdress = "";
     //#endregion
 
     //#region Email confermation elements
         var emailConfermationContainer = document.querySelector('.pTool-email-confirmation-container');
         var emailConfermationNext = document.querySelector('.pTool-email-confirmation-button');
+    //#endregion
+
+    //#region CONSTS
+        var EMAIL_END = '</div>';
     //#endregion
 //#endregion
 
@@ -565,9 +571,7 @@
         returnToMain();
     });
     //Email input listeners
-    emailSubmit.addEventListener('click', () => {
-        navigateTo(emailConfermationContainer);
-    });
+    emailSubmit.addEventListener('click', runSubmitButton);
     //Email confermation listeners
     emailConfermationNext.addEventListener('click', () => {
         returnToMain();
@@ -627,6 +631,12 @@
             var taxCost = Math.round(subTotal * tax);
             return taxCost;
         }
+        function getTaxStandAlone(tax){
+            tax = tax || 0.2;
+            var subTotal = getSubTotalPrice();
+            var taxCost = Math.round(subTotal * tax);
+            return taxCost;
+        }
         function getTotalPrice(subTotal, tax){
             return (subTotal + tax);
         }
@@ -651,6 +661,15 @@
             taxEle.innerText = ('$' + tax);
             totalEle.innerText = ('$' + total);
         }   
+        function createPreiceObject(){
+            var priceObj = {
+                subTotal: getSubTotalPrice(),
+                tax: getTaxStandAlone(),
+                totalPrice: getTotalPriceStandAlone()
+            };
+
+            return priceObj;
+        }
     //#endregion
 //#endregion
 //#region questionnaire functionality
@@ -752,6 +771,7 @@
         hideEle(receiptContainer);
         hideEle(emailInputContainer);
         hideEle(emailConfermationContainer);
+        hideEle(emailErrorEle);
     }
 
     function hidequestionnaire(){
@@ -826,6 +846,115 @@
     function showRecieptPage(){
         navigateTo([receiptContainer, pricContainer]);
         populateRelevantRecieptServiceItems();
+    }
+    function runSubmitButton(){
+        emailAdress = emailInput.value;
+        if(emailAdress.indexOf('@') < 0){
+            showEle(emailErrorEle);
+            return;
+        }
+        //Show Loading loading screen
+        sendEmail();
+        navigateTo(emailConfermationContainer);
+    }
+    function sendEmail(){
+        var bodyMessage = constructEmailBody();
+        var sendInfo = {
+            SecureToken: '52609d28-a075-4261-bdcf-f548a947fa27', //106fca1a-9df5-4925-84da-dd96526c3104 works
+            To : emailAdress,
+            From : "developer@singularitythread.com",
+            Subject : "pTool details00",
+            Body: bodyMessage
+        }
+        alert('Top of email to ' + emailAdress);
+    
+        Email.send(sendInfo)
+        .then(
+          message => alert(message)
+        );
+        alert('email being sent to: ' + emailAdress);
+    }
+    function constructEmailBody(){
+        var emailBody = '';
+        //#region emailBody
+        emailBody = '<div>' + 
+            '<div style="font-size: 1rem;">' +
+            '    Below is a recipt of your services' +
+            '</div>' +
+            '<div style="width: 100%;">' +
+            '    <div style="display: block;">' + 
+            '        <div style="display: flex; width: 100%; box-sizing: border-box; background-color: #DD5962; color: white; padding-top: 0.5rem; padding-bottom: 0.5rem; padding-left: 0.5rem;">' + 
+            '            <div style="width: 30%;">' + 
+            '                Service' + 
+            '            </div>' +
+            '            <div style="width: 60%;">' +
+            '                Description' +
+            '            </div>' +
+            '            <div style="width: 10%;">' +
+            '                Quantity' +
+            '            </div>' +
+            '        </div>' +
+            '    </div>';
+        //#endregion
+
+        //Construct service rows
+        var serviceRow = '';
+        currentCategory.getAllServices().forEach((service, i) => {
+            serviceRow = construceEmailServiceRow(service, i);
+            emailBody += serviceRow;
+        });
+        emailBody += '</div>'
+
+        emailBody += constructEmailTotal();
+        
+        emailBody += EMAIL_END;
+
+        return emailBody;
+    }
+    function construceEmailServiceRow(service, rowIndex){
+        var makeBlue = (rowIndex % 2 != 0); //If rowIndex is an odd number
+        var serviceRow = '<div style="display: block;' + (makeBlue ? ' background-color: #E0E2E8;' : '') + '">' + 
+            '    <div style="display: flex; flex-direction: column;">' +
+            '        <div style="display: flex;">' +
+            '            <div style="width: 30%; padding-right: 1rem; padding-left: 0.5rem;">' +
+                            service.getName() +
+            '            </div>' +
+            '            <div style="width: 60%;  padding-right: 1rem;">' +
+                            service.getDescription() +
+            '            </div>' +
+            '            <div style="width: 10%;">' +
+                            service.getQuantity() + 
+            '            </div>' +
+            '        </div>' +
+            '    </div>' +
+            '</div>';
+            return serviceRow;
+    }
+    function constructEmailTotal(){
+        var price = createPreiceObject();
+
+        var emailTotal = '<div style="border: 0.12rem solid slategray; margin-left: 50%; padding-left: 1rem;">' +
+            '    <div style="display: block;">' +
+            '        <div style="display: flex; width: 100%">' +
+            '            <p style="width: 50%; margin-top: 0.25rem; margin-bottom: 0.25rem;">Subtotal:</p>' +
+            '            <p style="width: 50%; margin-top: 0.25rem; margin-bottom: 0.25rem;">$' + price.subTotal +'</p>' +
+            '        </div>' +
+            '    </div>' +
+            '    <div style="display: block;">' +
+            '        <div style="display: flex; width: 100%">' +
+            '            <p style="width: 50%; margin-top: 0.25rem; margin-bottom: 0.25rem;">Tax:</p>' +
+            '            <p style="width: 50%; margin-top: 0.25rem; margin-bottom: 0.25rem;">$' + price.tax + '</p>' +
+            '        </div>' +
+            '    </div>' +
+            '    <div style="display: block;">' +
+            '        <div style="display: flex; width: 100%">' +
+            '            <p style="width: 50%; margin-top: 0.25rem; margin-bottom: 0.25rem;">total:</p>' +
+            '            <p style="width: 50%; margin-top: 0.25rem; margin-bottom: 0.25rem;">$' + price.totalPrice + '</p>' +
+            '        </div>' +
+            '    </div>' +
+            '</div>';
+
+            return emailTotal;
     }
 //#endregion
 

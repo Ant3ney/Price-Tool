@@ -12,6 +12,9 @@
     <!-- Google font -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- SMPT JS -->
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
 </head>
 <body>
     <h3>This is the price tool</h3>
@@ -252,6 +255,9 @@
 
         <!-- Email Input Container Start -->
         <div class="pTool-email-input-container display-none">
+            <div id="email-error">
+                <p>Please enter a valid email adress</p>
+            </div>
             <div class="pTool-email-input-row pTool-email-input-title">
                 <p class="pTool-service-text-large">Please Enter your email below</p>
             </div>
@@ -297,6 +303,11 @@
             </div>
         </div>
         <!-- Price container end -->
+
+        <!-- Testing email -->
+        <div id="test-div">
+
+        </div>
     </div>
     <script src="./price.js"></script>
 </body>
